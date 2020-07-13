@@ -40,6 +40,7 @@ def parse_direct_mention(message_text):
         and returns the user ID which was mentioned (Bot ID). If there is no direct mention, returns None
     """
     matches = re.search(MENTION_REGEX, message_text)
+    
     # the first group contains the username, the second group contains the remaining message
     return (matches.group(1), matches.group(2).strip()) if matches else (None, None)
 
