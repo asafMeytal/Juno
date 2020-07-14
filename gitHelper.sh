@@ -70,7 +70,7 @@ function PROMOTE_RELEASE(){
 		git branch -D "${release_branch}"
 		git push
 		git push origin tag "${release_branch}"
-		git push origin --delete "${release_branch}"
+		git push origin --delete ":refs/heads/${release_branch}"
 		echo "Promote has succeeded!!"
 	fi
 }
