@@ -6,7 +6,7 @@ import json
 import sqlite3
 from slackclient import SlackClient 
 
-print "test2"
+print "test222"
 """
 Make sure you have exported the following as ENV variables before starting the Bot:
 Slack bot token (SLACK_BOT_TOKEN)
