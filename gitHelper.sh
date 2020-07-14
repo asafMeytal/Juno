@@ -21,7 +21,8 @@ function MAKE_PULL_REQUEST(){
 				MAKE_RELEASE_BRANCH
 			fi
 		else
-			echo "An issue occured with the merge, failed to procced"
+			echo "An issue occured with the merge, failed to procced!"
+			echo "Please verify the feature branch name or stash\checkout unsaved files!"
 			return 1
 		fi
 	else
@@ -66,7 +67,7 @@ function PROMOTE_RELEASE(){
 		git checkout master
 		git merge "${release_branch}"
 		git tag -a "${release_branch}" -m "Merged release branch: ${release_branch}" HEAD
-		git branch -d "${release_branch}"
+		git branch -D "${release_branch}"
 		git push
 		git push origin tag "${release_branch}"
 		git push origin --delete "${release_branch}"
@@ -77,10 +78,12 @@ function PROMOTE_RELEASE(){
 function HELP(){
 	echo 'This script can assist with creating a PR, create a Realse branch, and Promote it to master'
 	echo
-	echo "Syntax: ./gitHelper [-pull_r|rb|pr]"
+	echo "Syntax: ./gitHelper [-h|pull_r|rb|pr]"
+	echo
+	echo "h         Present this help page"
 	echo "pull_r    Creates a Pull request from a feature branch and merge it to Develop branch"
 	echo "rf        Creates a Release branch flow from the current Develop branch"
-	echo "pr        Promote a release branch to master,tag it and delete release branch"
+	echo "pr        Promote a release branch to master,tag it and deletes the release branch"
 	echo
 
 
