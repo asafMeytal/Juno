@@ -64,13 +64,14 @@ function PROMOTE_RELEASE(){
 
 	if [[ "${master_check}" = "y" ]]; then
 		echo "Promoting to master: merging to master + tagging master + delete ${release_branch}"
+		version="${release_branch}" | sed 's/release/v/g'
 		git checkout master
 		git merge "${release_branch}"
-		git tag -a "${release_branch}" -m "Merged release branch: ${release_branch}" HEAD
+		git tag -a "${version}" -m "Merged release branch: ${release_branch}" HEAD
 		git branch -D "${release_branch}"
 		git push
-		git push origin tag "${release_branch}"
-		git push origin --delete ":refs/heads/${release_branch}"
+		git push origin tag "${version}"
+		git push origin --delete "${release_branch}"
 		echo "Promote has succeeded!!"
 	fi
 }
