@@ -11,6 +11,7 @@ function MAKE_PULL_REQUEST(){
 		echo "performing merge to dev branch.."
 		git checkout develop
 		git pull
+		git diff develop "${feature_branch}"
 		git merge "${feature_branch}"
 		merge_out=$?
 		if [[ merge_out -eq 0 ]]; then
